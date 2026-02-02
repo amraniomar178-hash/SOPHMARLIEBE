@@ -24,7 +24,6 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 2;
     }
 
     h2 {
@@ -43,38 +42,34 @@
       margin: 20px 0;
     }
 
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+    }
+
     button {
       padding: 15px 35px;
       font-size: 20px;
       border-radius: 15px;
       border: none;
       cursor: pointer;
-      position: absolute;
-      transition: transform 0.15s;
+      margin: 10px;
     }
 
     #yes {
       background: #ff4d6d;
       color: white;
-      position: static;
-      transition: transform 0.3s;
     }
 
     #no {
       background: #dee2e6;
       color: #333;
+      position: absolute;
     }
 
-    .heart {
-      position: fixed;
-      font-size: 24px;
-      animation: fly 2.5s linear forwards;
-      pointer-events: none;
-    }
-
-    @keyframes fly {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-350px); opacity: 0; }
+    .hearts {
+      font-size: 40px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -85,54 +80,41 @@
     <h2>💖 Sophie 💖</h2>
     <img src="https://cataas.com/cat/cute" alt="Cute cat with flowers">
     <p id="question">Would you be my Valentine?</p>
-    <button id="yes">YES 💕</button>
-    <button id="no">NO 😈</button>
+
+    <div class="buttons">
+      <button id="yes">YES 💕</button>
+      <button id="no">NO 😈</button>
+    </div>
+
+    <div id="hearts" class="hearts"></div>
   </div>
 
   <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
-    let escapeCount = 0;
+    const heartsDiv = document.getElementById("hearts");
 
-    function moveNoButton() {
-      escapeCount++;
+    function moveNo() {
+      const box = document.querySelector(".box");
+      const rect = box.getBoundingClientRect();
 
-      const maxX = window.innerWidth - noBtn.offsetWidth;
-      const maxY = window.innerHeight - noBtn.offsetHeight;
-
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      const x = Math.random() * (rect.width - 100);
+      const y = Math.random() * (rect.height - 100);
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
-
-      // YES button grows each escape
-      const scale = 1 + escapeCount * 0.05;
-      yesBtn.style.transform = `scale(${scale})`;
     }
 
-    noBtn.addEventListener("mouseenter", moveNoButton);
-    noBtn.addEventListener("click", moveNoButton);
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("click", moveNo);
 
     yesBtn.addEventListener("click", () => {
       document.getElementById("question").innerHTML =
-        "💖 YAAAAAY!!! BEST. VALENTINE. EVER. 💖";
-      explodeHearts();
-    });
+        "💖 YAAAAAY!!! BEST VALENTINE EVER 💖";
 
-    function explodeHearts() {
-      for (let i = 0; i < 30; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerText = "💖";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.bottom = "0px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 2500);
-      }
-    }
+      heartsDiv.innerHTML = "💖 💕 💖 💕 💖 💕 💖 💕 💖";
+    });
   </script>
 
 </body>
 </html>
-

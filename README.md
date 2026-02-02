@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>Valentine 💘</title>
-
   <style>
     body {
-      background: linear-gradient(135deg, #ffd6e8, #ffe6e6);
+      background-color: #ffe6e6;
       height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
-    .box {
-      background: white;
-      padding: 50px;
+    #valentineBox {
+      background-color: #fff0f5;
+      border: 2px solid #cc0000;
       border-radius: 30px;
+      padding: 50px;
       text-align: center;
-      width: 520px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      width: 550px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
 
-    h2 {
+    h1 {
+      color: #cc0000;
+      margin-bottom: 20px;
       font-size: 36px;
-      color: #d6336c;
     }
 
     p {
       font-size: 22px;
-      margin: 25px 0;
-    }
-
-    img {
-      width: 180px;
-      border-radius: 20px;
       margin: 20px 0;
     }
 
-    .buttons {
-      margin-top: 20px;
-      position: relative;
+    img {
+      width: 280px; /* BIG CAT */
+      border-radius: 25px;
+      margin: 20px 0;
     }
 
     button {
@@ -54,67 +49,59 @@
       border: none;
       cursor: pointer;
       margin: 10px;
-    }
-
-    #yes {
-      background: #ff4d6d;
-      color: white;
-    }
-
-    #no {
-      background: #dee2e6;
-      color: #333;
       position: absolute;
     }
 
-    .hearts {
-      font-size: 40px;
-      margin-top: 20px;
+    #yesBtn {
+      background-color: #ff4d4d;
+      color: white;
+      position: static;
+    }
+
+    #noBtn {
+      background-color: #cccccc;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="box">
-    <h2>💖 Sophie 💖</h2>
-    <img src="https://cataas.com/cat/cute" alt="Cute cat with flowers">
+  <div id="valentineBox">
+    <h1>💖 Sophie 💖</h1>
+
+    <!-- BIG CAT WITH FLOWERS -->
+    <img src="https://cataas.com/cat/cute" alt="Cat with flowers">
+
     <p id="question">Would you be my Valentine?</p>
 
-    <div class="buttons">
-      <button id="yes">YES 💕</button>
-      <button id="no">NO 😈</button>
-    </div>
-
-    <div id="hearts" class="hearts"></div>
+    <button id="yesBtn">YES 💕</button>
+    <button id="noBtn">NO 😈</button>
   </div>
 
   <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const heartsDiv = document.getElementById("hearts");
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
 
-    function moveNo() {
-      const box = document.querySelector(".box");
-      const rect = box.getBoundingClientRect();
+    function moveNoButton() {
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
 
-      const x = Math.random() * (rect.width - 100);
-      const y = Math.random() * (rect.height - 100);
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     }
 
-    noBtn.addEventListener("mouseenter", moveNo);
-    noBtn.addEventListener("click", moveNo);
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', moveNoButton);
 
-    yesBtn.addEventListener("click", () => {
+    yesBtn.addEventListener('click', () => {
       document.getElementById("question").innerHTML =
-        "💖 YAAAAAY!!! BEST VALENTINE EVER 💖";
-
-      heartsDiv.innerHTML = "💖 💕 💖 💕 💖 💕 💖 💕 💖";
+        "💖 YAAAAAY!!! 💖";
     });
   </script>
 
 </body>
 </html>
+
